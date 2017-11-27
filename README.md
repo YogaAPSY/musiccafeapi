@@ -51,3 +51,27 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 ## License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT).
+
+## Install
+
+- Git clone https://github.com/YogaAPSY/audioplayerapi
+- go to folder project
+- composer install
+- cp .env.example .env
+- php artisan key:generate
+- php artisan migrate
+- php artisan db:seed
+
+## Documentation API
+
+end point : localhost/foldername/public/api/lagu
+response : All List Music
+
+end point : localhost/foldername/public/api/lagu/{id}
+reponse : Detail Music
+
+end point : localhost/foldername/public/api/lagu/search/{keyword}
+response : Search detail Music by keyword
+
+end poin : localhost/foldername/public/api/login
+response : message , status_code and username
