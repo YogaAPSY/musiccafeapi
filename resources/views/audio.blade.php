@@ -1,3 +1,4 @@
+<script src="{{ asset('js/jquery-3.2.1.min.js') }}" type="text/javascript"></script>
 <audio controls id="audio">
     <source id="audio-source" src="#" type="audio/mpeg">
     Your browser does not support the audio element.
@@ -7,10 +8,9 @@
     $(document).ready(function() {
         var currently_playing = false;
         var audio = document.getElementById('audio');
-        console.log("0000");
+
         setInterval(function() {
             if (audio.ended) {
-                console.log("111");
                 $.ajax({
                     url: ' {{ action('PlayerController@refresh') }}',
                     type: 'POST',
@@ -19,9 +19,10 @@
                     },
                     success: function(response) {
                         var json = $.parseJSON(response);
+                        console.log(response);
                         currently_playing = json.currently_playing;
                         if (json.request_available) {
-                            audio.src = '{{asset('assets/')}}' + json.src;
+                            audio.src = '{{asset('')}}' + json.src;
                             audio.play();
                         }
                     },
@@ -39,7 +40,7 @@
                     success: function(response) {
                         var json = $.parseJSON(response);
                         if (json.request_available == true && !currently_playing) {
-                            audio.src = '{{ asset('assets/') }}' + json.src;
+                            audio.src = '{{ asset('') }}' + json.src;
                             console.log('URL: ' + audio.src);
                             audio.play();
                             currently_playing = json.currently_playing;
@@ -50,6 +51,6 @@
                     }
                 });
             }
-        }, 3000);
+        }, 1000);
     });
 </script>

@@ -6,8 +6,8 @@ use App\Lagu;
 use App\RequestQueue;
 use Dingo\Api\Facade\response;
 use Illuminate\Http\Request;
-use Illuminate\Http\session;
 use Illuminate\Support\Carbon;
+use Session;
 
 class PlayerController extends Controller
 {
@@ -35,7 +35,7 @@ class PlayerController extends Controller
            return $e->getMessage();
         }
     }
-    /*
+
     public function refresh(Request $request)
     {
         try {
@@ -45,31 +45,24 @@ class PlayerController extends Controller
 
         if(count($musicRequest['playlist']) > 1)
         {
-            echo "111";
             $musicRequest['playlist']['request_available'] = true;
             $musicRequest['playlist']['currently_playing'] = $request->input('currently_playing');
             if ($musicRequest['playlist']['currently_playing'] != $musicRequest['playlist'][0]->id)
             {
-                echo "22";
                 Session::put('currently_playing', $musicRequest['playlist'][0]->id);
                 $musicRequest['playlist']['currently_playing'] = $musicRequest['playlist'][0]->id;
-                var_dump($musicRequest['playlist']['currently_playing']);
-                $music = Lagu::where('id', $musicRequest['playlist']['currently_playing']);
-                $musicRequest['playlist']['src'] = $musicRequest->slug;
+                $music = Lagu::where('id', $musicRequest['playlist']['currently_playing'])->first();
+                $musicRequest['playlist']['src'] = $music->slug;
             } else {
-                echo "333";
-                RequestQueue::where($musicRequest['playlist'][0]->id)->update(['played' => '1']);
+                RequestQueue::where($musicRequest['playlist'][0]->id)->update(['played' => '1'])->get();
             }
         } else {
-            echo "4444";
             $musicRequest['playlist']['currently_playing'] = false;
         }
-        echo "555";
         echo json_encode($musicRequest['playlist']);
         } catch (\Exception $e){
-            echo "666";
-            return $this->response->errorInternal($e->getMessage());
+
+            return $e->getMessage();
         }
     }
-*/
 }
