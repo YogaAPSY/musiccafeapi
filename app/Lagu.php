@@ -2,14 +2,14 @@
 
 namespace App;
 
-use App\Album;
+use App\RequestQueue;
 use Illuminate\Database\Eloquent\Model;
 
 class Lagu extends Model
 {
     protected $table = 'lagu';
 
-    public function albums(){
-        return $this->belongsTo(Album::class,'album_id');
+    public function request(){
+        return $this->belongsTo(RequestQueue::class, 'music_id');
     }
 }

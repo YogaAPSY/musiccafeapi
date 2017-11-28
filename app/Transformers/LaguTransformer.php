@@ -14,7 +14,7 @@ class LaguTransformer extends TransformerAbstract
             'artist' => $lagu->artist,
             'genre' => $lagu->genre,
             'tahun' => $lagu->tahun,
-            'album' => $lagu->albums->nama_album,
+            'album' => $lagu->album,
         ];
     }
 }

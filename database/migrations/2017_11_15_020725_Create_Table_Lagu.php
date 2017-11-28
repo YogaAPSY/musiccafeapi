@@ -16,12 +16,12 @@ class CreateTableLagu extends Migration
         Schema::create('lagu', function(Blueprint $table){
             $table->increments('id');
             $table->string('judul', 50);
+            $table->string('album', 50);
             $table->string('artist', 50);
             $table->string('genre', 30);
             $table->string('tahun', 10);
+            $table->string('slug', 60);
 
-            $table->integer('album_id')->unsigned();
-            $table->foreign('album_id')->refrences('id')->on('album');
             $table->timestamps();
         });
     }

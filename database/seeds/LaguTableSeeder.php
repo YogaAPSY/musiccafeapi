@@ -14,29 +14,33 @@ class LaguTableSeeder extends Seeder
     {
          DB::table('lagu')->insert([
             [
-                'judul' => "Hari Bersamanya",
-                'artist' => "Sheila on 7",
+                'judul' => "Pelangi",
+                'artist' => "Hivi",
                 'genre' => "Pop",
-                'tahun' => "2011",
-                'album_id' => "1",
+                'tahun' => "2016",
+                'slug' => "music\HIVI! - Pelangi.mp3",
+                'album' => "Single Pop",
                 'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
             ],
              [
-                'judul' => "Bait Pertama",
-                'artist' => "Sheila on 7",
+                'judul' => "Only  Hope",
+                'artist' => "Secondhand Serenade",
                 'genre' => "Pop",
-                'tahun' => "2011",
-                'album_id' => "1",
+                'tahun' => "2010",
+                'slug' => "music\Secondhand Serenade - Only Hope.mp3",
+                'album' => "Hear Me Now",
                 'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
             ],
              [
-                'judul' => "Kamus Hidupku",
-                'artist' => "Sheila on 7",
+                'judul' => "More Than Words",
+                'artist' => "Extreme",
                 'genre' => "Pop",
                 'tahun' => "2011",
-                'album_id' => "1",
+                'album' => "unknown",
+                'slug' => "music\More Than Words.mp3",
                 'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
             ],
+            /*
               [
                 'judul' => "Perfect Time",
                 'artist' => "Sheila on 7",
@@ -277,6 +281,7 @@ class LaguTableSeeder extends Seeder
                 'album_id' => "3",
                 'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
             ]
+            */
         ]);
     }
 }
