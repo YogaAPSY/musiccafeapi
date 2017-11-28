@@ -55,6 +55,7 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
 ## Install
 
 - Git clone https://github.com/YogaAPSY/audioplayerapi
+- Buat DB sesuai dengan nama DB yang ada pada file .env
 - go to folder project
 - composer install
 - cp .env.example .env
@@ -64,14 +65,14 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
 
 ## Documentation API
 
-end point : localhost/foldername/public/api/lagu
+end point : localhost/foldername/public/api/lagu | 
 response : All List Music
 
-end point : localhost/foldername/public/api/lagu/{id}
+end point : localhost/foldername/public/api/lagu/{id} | 
 reponse : Detail Music
 
-end point : localhost/foldername/public/api/lagu/search/{keyword}
+end point : localhost/foldername/public/api/lagu/search/{keyword} | 
 response : Search detail Music by keyword
 
-end poin : localhost/foldername/public/api/login
+end poin : localhost/foldername/public/api/login | 
 response : message , status_code and username
