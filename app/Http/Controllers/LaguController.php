@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\ApiController;
 use App\Lagu;
+use App\RequestQueue;
 use App\Transformers\AlbumTransformer;
 use App\Transformers\LaguTransformer;
+use App\Transformers\RequestTransformer;
 use Dingo\Api\Facade\response;
 use Illuminate\Http\Request;
 use League\Fractal\Manager;
@@ -44,7 +46,7 @@ class LaguController extends ApiController
     public function show($id)
     {
         try {
-            $Music = Lagu::findOrFail($id);
+            $Music = Lagu::where('music_id',$id)->first();
             return $this->response->item($Music, new LaguTransformer);
         } catch (\Exception $e) {
             return $this->response->errorInternal($e->getMessage());
@@ -54,9 +56,21 @@ class LaguController extends ApiController
     public function search($keyword)
     {
         try {
-            $searchMusic = Lagu::Where('judul','LIKE', $keyword)->orWhere('artist','LIKE', $keyword)->orWhere('album', 'LIKE', $keyword)->get();
+            $searchMusic = Lagu::Where('judul','LIKE', '%' .$keyword. '%')
+            ->orWhere('artist','LIKE', '%' .$keyword. '%')->orWhere('album', 'LIKE', '%' .$keyword. '%')->get();
             return $this->response->collection($searchMusic, new LaguTransformer);
 
+        } catch (\Exception $e) {
+            return $this->response->errorInternal($e->getMessage());
+        }
+    }
+
+    public function list()
+    {
+        try {
+            $list = RequestQueue::where('played', '0')->with('lagus')->get();
+
+            return $this->response->collection($list, new RequestTransformer);
         } catch (\Exception $e) {
             return $this->response->errorInternal($e->getMessage());
         }

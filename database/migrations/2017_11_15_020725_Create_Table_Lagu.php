@@ -14,7 +14,7 @@ class CreateTableLagu extends Migration
     public function up()
     {
         Schema::create('lagu', function(Blueprint $table){
-            $table->increments('id');
+            $table->increments('music_id');
             $table->string('judul', 50);
             $table->string('album', 50);
             $table->string('artist', 50);

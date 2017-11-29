@@ -9,7 +9,7 @@ class LaguTransformer extends TransformerAbstract
     public function transform(Lagu $lagu)
     {
         return [
-            'id' => $lagu->id,
+            'id' => $lagu->music_id,
             'judul' => $lagu->judul,
             'artist' => $lagu->artist,
             'genre' => $lagu->genre,

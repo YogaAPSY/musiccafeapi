@@ -25,11 +25,17 @@ class PlayerController extends Controller
     {
         try {
 
-            $requestLagu = Lagu::findOrFail($id);
+            $requestLagu = Lagu::where('music_id',$id)->first();
 
             $requestQueue = new RequestQueue();
-            $requestQueue->music_id = $requestLagu->id;
+            $requestQueue->music_id = $requestLagu->music_id;
             $requestQueue->save();
+
+            return [
+                "data" => [
+                    "message" => "success to add music to playlist",
+                ]
+            ];
 
         } catch (\Exception $e){
            return $e->getMessage();
@@ -39,22 +45,27 @@ class PlayerController extends Controller
     public function refresh(Request $request)
     {
         try {
-        $music = RequestQueue::all();
-        $musicRequest['playlist'] = $music->where('played', 0);
+        $music = RequestQueue::where('played', '0')->get();
+
+        $musicRequest['playlist'] = $music;
+
         $musicRequest['playlist']['request_available'] = false;
 
         if(count($musicRequest['playlist']) > 1)
         {
+
             $musicRequest['playlist']['request_available'] = true;
             $musicRequest['playlist']['currently_playing'] = $request->input('currently_playing');
             if ($musicRequest['playlist']['currently_playing'] != $musicRequest['playlist'][0]->id)
             {
                 Session::put('currently_playing', $musicRequest['playlist'][0]->id);
                 $musicRequest['playlist']['currently_playing'] = $musicRequest['playlist'][0]->id;
-                $music = Lagu::where('id', $musicRequest['playlist']['currently_playing'])->first();
+
+                $music = Lagu::where('music_id', $musicRequest['playlist']['currently_playing'])->first();
+
                 $musicRequest['playlist']['src'] = $music->slug;
             } else {
-                RequestQueue::where($musicRequest['playlist'][0]->id)->update(['played' => '1'])->get();
+                RequestQueue::where('id', $musicRequest['playlist'][0]->id)->update(['played' => '1']);
             }
         } else {
             $musicRequest['playlist']['currently_playing'] = false;

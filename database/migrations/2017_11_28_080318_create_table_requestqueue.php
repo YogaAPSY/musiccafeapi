@@ -18,7 +18,7 @@ class CreateTableRequestqueue extends Migration
             $table->enum('played', [0,1])->default(0);
 
             $table->integer('music_id')->unsigned();
-            $table->foreign('music_id')->refrences('id')->on('lagu');
+            $table->foreign('music_id')->refrences('music_id')->on('lagu');
             $table->timestamps();
         });
     }

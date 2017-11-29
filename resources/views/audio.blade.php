@@ -18,6 +18,7 @@
                         currently_playing: currently_playing
                     },
                     success: function(response) {
+                        console.log(response);
                         var json = $.parseJSON(response);
                         console.log(response);
                         currently_playing = json.currently_playing;
@@ -38,6 +39,7 @@
                         currently_playing: currently_playing
                     },
                     success: function(response) {
+                        console.log(response);
                         var json = $.parseJSON(response);
                         if (json.request_available == true && !currently_playing) {
                             audio.src = '{{ asset('') }}' + json.src;

@@ -10,6 +10,6 @@ class RequestQueue extends Model
     protected $table ='request_queue';
 
     public function lagus(){
-        return $this->hasMany(Lagu::class, 'music_id');
+        return $this->belongsTo(Lagu::class, 'music_id' , 'music_id');
     }
 }

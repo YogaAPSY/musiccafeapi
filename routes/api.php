@@ -16,6 +16,7 @@ $api = app('Dingo\Api\Routing\Router');
 $api->version('v1',function ($api) {
     $api->post('login', 'App\Http\Controllers\LaguController@login');
     $api->get('lagu', 'App\Http\Controllers\LaguController@index');
+    $api->get('lagu/playlist', 'App\Http\Controllers\LaguController@list');
     $api->get('lagu/putar', 'App\Http\Controllers\PlayerController@index');
     $api->post('lagu/refresh', 'App\Http\Controllers\PlayerController@refresh');
     $api->get('lagu/{id}', 'App\Http\Controllers\LaguController@show');
