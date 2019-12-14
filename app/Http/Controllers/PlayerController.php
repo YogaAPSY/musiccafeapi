@@ -56,12 +56,12 @@ class PlayerController extends Controller
 
             $musicRequest['playlist']['request_available'] = true;
             $musicRequest['playlist']['currently_playing'] = $request->input('currently_playing');
-            if ($musicRequest['playlist']['currently_playing'] != $musicRequest['playlist'][0]->id)
+            if ($musicRequest['playlist']['currently_playing'] != $musicRequest['playlist'][0]->music_id)
             {
-                Session::put('currently_playing', $musicRequest['playlist'][0]->id);
-                $musicRequest['playlist']['currently_playing'] = $musicRequest['playlist'][0]->id;
+                Session::put('currently_playing', $musicRequest['playlist'][0]->music_id);
+                $musicRequest['playlist']['currently_playing'] = $musicRequest['playlist'][0]->music_id;
 
-                $music = Lagu::first();
+                $music = Lagu::where('music_id', $musicRequest['playlist']['currently_playing'])->first();
 
                 $musicRequest['playlist']['src'] = $music->slug;
             } else {
